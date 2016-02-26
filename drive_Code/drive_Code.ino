@@ -1,4 +1,5 @@
 // This is some test code for driving
+#include <Servo.h>
 
 void setup() {
   // put your setup code here, to run once:
@@ -28,7 +29,7 @@ void fieldCentricControl(double transX, double transY, double rot){
   
   double robX;
   double robY;
-  if(transAngle < PI/4.0 || transAngle < 7.0*PI/4.0){ // positive X is max
+  if(transAngle < PI/4.0 || transAngle > 7.0*PI/4.0){ // positive X is max
     robX = transMag;
     robY = robX*tan(transAngle);
   }else if(transAngle < 3.0*PI/4.0){ // positive Y is max
