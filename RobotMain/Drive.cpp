@@ -25,14 +25,14 @@ void Drive::control(double _transX, double _transY, double _rot){
   rot = _rot;
 }
 
-void Drive::periodic()
+void Drive::periodic(ControllerData ctrl)
 {
   switch(mode){
   case fieldCentric:
-    fieldCentricControl(transX, transY, rot);
+    fieldCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);
     break;
   case robotCentric:
-    robotCentricControl(transX, transY, rot);
+    robotCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);
     break;
   }
 }

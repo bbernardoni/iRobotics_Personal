@@ -3,19 +3,20 @@
 
 #include <Servo.h>
 #include "Arduino.h"
-#include "Subsystem.h"
+#include "ControllerData.h"
+#include "Constants.h"
 
-class Drive: public Subsystem
+class Drive
 {
   public:
     enum DriveMode { fieldCentric, robotCentric };
     
     Drive(int _lD, int _rD, int _mD, DriveMode _mode);
     void startUp();
-    void periodic();
+    void periodic(ControllerData ctrl);
     void control(double transX, double transY, double rot);
     
-    //Positive Modulus (n%i)
+    // Positive Modulus (n%i)
     static double PMod(double n, double i) { return n-i*floor(n/i); }
     // converts from [-1.0, 1.0] to [0,180] for servo write
     static int SOut(double out) { return int((out+1.0)*90.0); }

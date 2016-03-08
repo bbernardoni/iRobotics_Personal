@@ -14,12 +14,12 @@
 #define DRIVE_MODE              Drive::robotCentric
 
 // Controls
-#define CTRL_TRANS_X            DS_TO_DB(ctrl.LSX)
-#define CTRL_TRANS_Y            DS_TO_DB(ctrl.LSY)
-#define CTRL_ROT                DS_TO_DB(ctrl.RSX)
+#define CTRL_TRANS_X            DS_TO_DB(ctrl.driver1.LSX)
+#define CTRL_TRANS_Y            DS_TO_DB(ctrl.driver1.LSY)
+#define CTRL_ROT                DS_TO_DB(ctrl.driver1.RSX)
 
 // Control macros
 // Convert driver station data to [-1.0, 1.0]
-#define DS_TO_DB(X)             ((X/255.0) - 1.0)
+#define DS_TO_DB(X)             ((X/100.0) - 1.0)
 // Deadband macro to be written
 

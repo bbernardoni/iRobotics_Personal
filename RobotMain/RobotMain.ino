@@ -35,10 +35,10 @@ void loop() {
 // if it is the robot will be unresponsive
 bool attemptRead(){
   // return if we have do not have a full controller info message
-  if (Serial.available() < 10-bufferIndex)
+  if (Serial.available() < 18-bufferIndex)
     return false;
   // read serial and check that 10 bytes were read
-  if(Serial.readBytes(&readBuffer.bytes[bufferIndex], 10-bufferIndex) < 10-bufferIndex){
+  if(Serial.readBytes(&readBuffer.bytes[bufferIndex], 18-bufferIndex) < 18-bufferIndex){
     bufferIndex = 0;
     return false;
   }
@@ -48,25 +48,25 @@ bool attemptRead(){
   while(readBuffer.startByte != 255 || readBuffer.stopByte != 254){
     // attempt to recover
     int i;
-    for(i=1; i<10; i++)
+    for(i=1; i<18; i++)
       if(readBuffer.bytes[i] == 255)
         break;
-    if(i >= 10){
+    if(i >= 18){
       // recovery failed, attempt another read in case we have more bytes in the buffer
       return attemptRead();
     }else{
       // found possible start byte, attempt to read rest of message
-      for(int j=i; j<10; j++){
+      for(int j=i; j<18; j++){
         readBuffer.bytes[j-i] = readBuffer.bytes[j];
       }
       if(Serial.available() >= i){
         // rest of message available
-        if(Serial.readBytes(&readBuffer.bytes[10-i], i) < i)
+        if(Serial.readBytes(&readBuffer.bytes[18-i], i) < i)
           return false;
       }else{
         // wait for rest of message
         // we have to check next function call because this function cannot be blocking
-        bufferIndex = 10 - i;
+        bufferIndex = 18 - i;
         return false;
       }
     }
