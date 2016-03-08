@@ -5,10 +5,11 @@
 #define LEFT_MOTOR_PIN          1
 #define RIGHT_MOTOR_PIN         2
 #define MIDDLE_MOTOR_PIN        3
-#define FOAM_BALL_ARM_PIN       4
-#define RELEASER_ARM_PIN        5
-#define GOLF_BALL_SERVO_PIN     6
-#define FOAM_BALL_SERVO_PIN     7
+#define GYRO_PIN                4
+#define FOAM_BALL_ARM_PIN       5
+#define RELEASER_ARM_PIN        6
+#define GOLF_BALL_SERVO_PIN     7
+#define FOAM_BALL_SERVO_PIN     8
 
 // Default drive mode
 #define DRIVE_MODE              Drive::robotCentric

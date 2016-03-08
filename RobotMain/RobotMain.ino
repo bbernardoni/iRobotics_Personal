@@ -2,10 +2,12 @@
 #include "ControllerData.h"
 #include "Robot.h"
 #include <Servo.h>
+#include <SPI.h>
 
 Robot Rob = Robot(  LEFT_MOTOR_PIN,
                     RIGHT_MOTOR_PIN,
                     MIDDLE_MOTOR_PIN,
+                    GYRO_PIN,
                     FOAM_BALL_ARM_PIN,
                     RELEASER_ARM_PIN,
                     GOLF_BALL_SERVO_PIN,
@@ -20,6 +22,8 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(BAUD_RATE);
   Rob.startUp();
+  
+  delay(100);
 }
 
 void loop() {

@@ -5,13 +5,14 @@
 #include "Arduino.h"
 #include "ControllerData.h"
 #include "Constants.h"
+#include <SPI.h>
 
 class Drive
 {
   public:
     enum DriveMode { fieldCentric, robotCentric };
     
-    Drive(int _lD, int _rD, int _mD, DriveMode _mode);
+    Drive(int _lD, int _rD, int _mD, int _gyroPin, DriveMode _mode);
     void startUp();
     void periodic(ControllerData ctrl);
     void control(double transX, double transY, double rot);
@@ -24,6 +25,8 @@ class Drive
   private:
     void fieldCentricControl(double transX, double transY, double rot);
     void robotCentricControl(double transX, double transY, double rot);
+
+    double getGyroAngle();
     
     Servo leftMotors;
     Servo rightMotors;
@@ -37,6 +40,12 @@ class Drive
     double rot;
 
     DriveMode mode;
+
+    int gyroPin;
+    unsigned long lastGyroRead;
+    unsigned long gyroSpeed;
+    unsigned long gyroAngle;
+    
 };
 
 
