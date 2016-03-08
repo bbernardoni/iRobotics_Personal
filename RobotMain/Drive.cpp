@@ -1,11 +1,12 @@
 #include "Drive.h"
 
-Drive::Drive(int _lD, int _rD, int _mD, int _gyroPin, DriveMode _mode)
+Drive::Drive(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, DriveMode _mode)
 {
   rD = _rD;
   lD = _lD;
   mD = _mD;
   gyroPin = _gyroPin;
+  shifterPin =  _shifterPin;
   mode = _mode;
 
   transX = 0.0;
@@ -26,16 +27,15 @@ void Drive::startUp()
   SPI.setClockDivider(SPI_CLOCK_DIV16); 
   SPI.setDataMode(SPI_MODE0);
   lastGyroRead = micros();
-}
 
-void Drive::control(double _transX, double _transY, double _rot){
-  transX = _transX;
-  transY = _transY;
-  rot = _rot;
+  pinMode(shifterPin, OUTPUT);
+  digitalWrite(shifterPin, LOW);
 }
 
 void Drive::periodic(ControllerData ctrl)
 {
+  digitalWrite(shifterPin, CTRL_SHIFT? LOW: HIGH);
+  
   switch(mode){
   case fieldCentric:
     fieldCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);

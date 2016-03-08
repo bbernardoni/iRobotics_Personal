@@ -1,7 +1,9 @@
 #include "Robot.h"
 
-Robot::Robot(int _lD, int _rD, int _mD, int _gyroPin, int _bArm, int _rArm, int _gbServo, int _fbServo, Drive::DriveMode _mode):
-  drive(_lD, _rD, _mD, _gyroPin, _mode)
+Robot::Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin,
+             int _bArm, int _rArm, int _gbServo, int _fbServo, 
+             Drive::DriveMode _mode):
+  drive(_lD, _rD, _mD, _gyroPin, _shifterPin, _mode)
 {
   bArm = _bArm;
   rArm = _rArm;

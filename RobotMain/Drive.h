@@ -12,10 +12,9 @@ class Drive
   public:
     enum DriveMode { fieldCentric, robotCentric };
     
-    Drive(int _lD, int _rD, int _mD, int _gyroPin, DriveMode _mode);
+    Drive(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, DriveMode _mode);
     void startUp();
     void periodic(ControllerData ctrl);
-    void control(double transX, double transY, double rot);
     
     // Positive Modulus (n%i)
     static double PMod(double n, double i) { return n-i*floor(n/i); }
@@ -35,16 +34,14 @@ class Drive
     int lD;
     int mD;
 
-    double transX;
-    double transY;
-    double rot;
-
     DriveMode mode;
 
     int gyroPin;
     unsigned long lastGyroRead;
     unsigned long gyroSpeed;
     unsigned long gyroAngle;
+
+    int shifterPin;
     
 };
 
