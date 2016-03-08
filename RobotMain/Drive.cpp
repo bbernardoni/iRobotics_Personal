@@ -1,10 +1,12 @@
 #include "Drive.h"
 
-Drive::Drive(int _lD, int _rD, int _mD, DriveMode _mode)
+Drive::Drive(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, DriveMode _mode)
 {
   rD = _rD;
   lD = _lD;
   mD = _mD;
+  gyroPin = _gyroPin;
+  shifterPin =  _shifterPin;
   mode = _mode;
 
   transX = 0.0;
@@ -17,31 +19,31 @@ void Drive::startUp()
   leftMotors.attach(lD);
   rightMotors.attach(rD);
   centerMotor.attach(mD);
+  
+  SPI.begin();
+  pinMode(gyroPin, OUTPUT);
+  digitalWrite(gyroPin, HIGH);
+  SPI.setBitOrder(MSBFIRST);
+  SPI.setClockDivider(SPI_CLOCK_DIV16); 
+  SPI.setDataMode(SPI_MODE0);
+  lastGyroRead = micros();
+
+  pinMode(shifterPin, OUTPUT);
+  digitalWrite(shifterPin, LOW);
 }
 
-void Drive::control(double _transX, double _transY, double _rot){
-  transX = _transX;
-  transY = _transY;
-  rot = _rot;
-}
-
-void Drive::periodic()
+void Drive::periodic(ControllerData ctrl)
 {
+  digitalWrite(shifterPin, CTRL_SHIFT? LOW: HIGH);
+  
   switch(mode){
   case fieldCentric:
-    fieldCentricControl(transX, transY, rot);
+    fieldCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);
     break;
   case robotCentric:
-    robotCentricControl(transX, transY, rot);
+    robotCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);
     break;
   }
-}
-
-// return the current angle (radians) the robot is facing
-// 0 is forward and counter clockwise is positive
-double getGyroAngle(){
-  // add code to read gyro
-  return 0.0;
 }
 
 void Drive::fieldCentricControl(double transX, double transY, double rot){
@@ -90,4 +92,26 @@ void Drive::robotCentricControl(double transX, double transY, double rot){
   leftMotors.write(SOut(lSpeed));
   rightMotors.write(SOut(rSpeed));
   centerMotor.write(SOut(transX));
+}
+
+// return the current angle (radians) the robot is facing
+// 0 is forward and counter clockwise is positive
+double Drive::getGyroAngle(){
+  unsigned long readTime = micros();
+  
+  digitalWrite(gyroPin, LOW);
+  int result = SPI.transfer(0x20);
+  result = result << 8 | SPI.transfer(0x00);
+  int result2 = SPI.transfer(0x00) >>2;
+  SPI.transfer(0x00);
+  result = result << 6 | result2;
+  digitalWrite(gyroPin, HIGH);
+
+  // low pass filter
+  gyroSpeed = (gyroSpeed)*0.5 + result*(1 - 0.5);
+  // gyro returns in units of 80 LSB/deg/sec
+  gyroAngle += gyroSpeed/80.0*(readTime-lastGyroRead)/1000000.0;
+  lastGyroRead = readTime;
+  
+  return gyroAngle;
 }

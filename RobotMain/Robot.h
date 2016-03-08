@@ -9,7 +9,9 @@
 class Robot
 {
   public:
-    Robot(int _lD, int _rD, int _mD, int _bArm, int _rArm, int _gbServo, int _fbServo, Drive::DriveMode _mode);
+    Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, 
+          int _bArm, int _rArm, int _gbServo, int _fbServo, 
+          Drive::DriveMode _mode);
     void startUp();
     void periodic();
 

@@ -4,6 +4,9 @@
 int result;
 int result2;
 int Gyro1;
+double ang;
+unsigned long lastRead;
+unsigned long readTime;
 
 void setup() {
   Serial.begin(9600);
@@ -15,7 +18,7 @@ void setup() {
   SPI.setClockDivider(SPI_CLOCK_DIV16); 
   SPI.setDataMode(SPI_MODE0);
   delay(100);
-
+  lastRead = micros();
 }
 
 void loop() {
@@ -30,7 +33,11 @@ void loop() {
   digitalWrite(7, HIGH);  
 
   Gyro1 = (Gyro1)*0.5 + result*(1 - 0.5);
+  readTime = micros();
+  ang += Gyro1/80.0*(readTime-lastRead)/1000000.0;
+  lastRead = readTime;
 
-  Serial.println(Gyro1);
-
+  Serial.println(ang);
+  delay(10);
+ 
 }
