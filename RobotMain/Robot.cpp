@@ -18,6 +18,14 @@ void Robot::startUp()
   ctrl.stopByte = 254;
   for(int i=1; i<17; i++)
     ctrl.bytes[i] = 0;
+  ctrl.driver1.LSX = 100;
+  ctrl.driver1.LSY = 100;
+  ctrl.driver1.RSX = 100;
+  ctrl.driver1.RSY = 100;
+  ctrl.driver2.LSX = 100;
+  ctrl.driver2.LSY = 100;
+  ctrl.driver2.RSX = 100;
+  ctrl.driver2.RSY = 100;
 }
 
 void Robot::periodic()

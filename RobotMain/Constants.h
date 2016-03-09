@@ -2,7 +2,7 @@
 #define BAUD_RATE               57600
 
 // Pin numbers
-#define LEFT_MOTOR_PIN          1
+#define LEFT_MOTOR_PIN          10
 #define RIGHT_MOTOR_PIN         2
 #define MIDDLE_MOTOR_PIN        3
 #define GYRO_PIN                4
@@ -14,7 +14,7 @@
 #define FOAM_BALL_SERVO_PIN     8
 
 // Default drive mode
-#define DRIVE_MODE              Drive::robotCentric
+#define DRIVE_MODE              Drive::fieldCentric
 
 // Controls
 #define CTRL_TRANS_X            DS_TO_DB(ctrl.driver1.LSX)
