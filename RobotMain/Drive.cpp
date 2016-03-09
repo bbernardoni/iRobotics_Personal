@@ -9,9 +9,9 @@ Drive::Drive(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, DriveMode
   shifterPin =  _shifterPin;
   mode = _mode;
 
-  transX = 0.0;
-  transY = 0.0;
-  rot = 0.0;
+  double transX = 25.0;
+  double transY = 25.0;
+  double rot = 0.0;
 }
 
 void Drive::startUp()
@@ -26,7 +26,7 @@ void Drive::startUp()
   SPI.setBitOrder(MSBFIRST);
   SPI.setClockDivider(SPI_CLOCK_DIV16); 
   SPI.setDataMode(SPI_MODE0);
-  lastGyroRead = micros();
+  lastGyroRead = 0;
 
   pinMode(shifterPin, OUTPUT);
   digitalWrite(shifterPin, LOW);
@@ -34,7 +34,7 @@ void Drive::startUp()
 
 void Drive::periodic(ControllerData ctrl)
 {
-  digitalWrite(shifterPin, CTRL_SHIFT? LOW: HIGH);
+  digitalWrite(shifterPin, CTRL_SHIFT? HIGH: LOW);
   
   switch(mode){
   case fieldCentric:
@@ -49,9 +49,11 @@ void Drive::periodic(ControllerData ctrl)
 void Drive::fieldCentricControl(double transX, double transY, double rot){
   double robX = 0.0;
   double robY = 0.0;
+  double gyroAngle = getGyroAngle();
+  Serial.println(gyroAngle);
 
   if(transX != 0.0 && transY != 0.0){
-    double transAngle = PMod(atan2(transY, transX) - getGyroAngle(), PI*2.0);
+    double transAngle = PMod(atan2(transY, transX) - gyroAngle, PI*2.0);
     double transMag = (fabs(transX) > fabs(transY))? fabs(transX): fabs(transY);
     
     if(transAngle < PI/4.0 || transAngle > 7.0*PI/4.0){ // positive X is max
@@ -90,14 +92,16 @@ void Drive::robotCentricControl(double transX, double transY, double rot){
     rSpeed = 1.0;
 
   leftMotors.write(SOut(lSpeed));
-  rightMotors.write(SOut(rSpeed));
-  centerMotor.write(SOut(transX));
+  rightMotors.write(Rev(SOut(rSpeed)));
+  centerMotor.write(Rev(SOut(transX)));
 }
 
 // return the current angle (radians) the robot is facing
 // 0 is forward and counter clockwise is positive
 double Drive::getGyroAngle(){
   unsigned long readTime = micros();
+  if(lastGyroRead == 0)
+    lastGyroRead = readTime;
   
   digitalWrite(gyroPin, LOW);
   int result = SPI.transfer(0x20);
@@ -110,7 +114,11 @@ double Drive::getGyroAngle(){
   // low pass filter
   gyroSpeed = (gyroSpeed)*0.5 + result*(1 - 0.5);
   // gyro returns in units of 80 LSB/deg/sec
-  gyroAngle += gyroSpeed/80.0*(readTime-lastGyroRead)/1000000.0;
+
+  if(abs(gyroSpeed) > 40){
+    gyroAngle += gyroSpeed/80.0*(readTime-lastGyroRead)/1000000.0;
+    //Serial.println(gyroSpeed);
+  }
   lastGyroRead = readTime;
   
   return gyroAngle;
