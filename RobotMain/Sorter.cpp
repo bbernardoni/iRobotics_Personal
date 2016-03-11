@@ -43,13 +43,13 @@ void Sorter::periodic(ControllerData ctrl)
     }
     break;
   case accept:
-    if(millis() - startSortTime > 2000){
+    if(millis() - startSortTime > SORTER_ACCEPT_TIME){
       sorterServo.write(SORTER_NEUTRAL_POSN);
       state = neutral;
     }
     break;
   case reject:
-    if(millis() - startSortTime > 2000){
+    if(millis() - startSortTime > SORTER_REJECT_TIME){
       sorterServo.write(SORTER_NEUTRAL_POSN);
       state = neutral;
     }

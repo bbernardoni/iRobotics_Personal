@@ -56,6 +56,8 @@
 // Times
 #define GOLF_HOLD_TIME          5000
 #define FOAM_HOLD_TIME          4000
+#define SORTER_ACCEPT_TIME      2000
+#define SORTER_REJECT_TIME      2000
 
 // Control macros
 // Convert driver station data to [-1.0, 1.0]
