@@ -1,24 +1,46 @@
 #include "Sorter.h"
 
-Sorter::Sorter(int _sorterServoPin)//:
-// tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
+Sorter::Sorter(int _sorterServoPin):
+  tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
 {
   sorterServoPin = _sorterServoPin;
   state = neutral;
+  robotColor = red;
 }
 
 void Sorter::startUp()
 {
   sorterServo.attach(sorterServoPin);
-  //tcs.begin();
-  //vcnl.begin();
+  sorterServo.write(SORTER_NEUTRAL_POSN);
+  tcs.begin();
+  vcnl.begin();
 }
 
 void Sorter::periodic(ControllerData ctrl)
 {
+  if(CTRL_ROBOT_RED){
+    robotColor = red;
+  }
+  if(CTRL_ROBOT_BLUE){
+    robotColor = blue;
+  }
+  if(CTRL_ROBOT_WHITE){
+    robotColor = white;
+  }
+  if(CTRL_ROBOT_YELLOW){
+    robotColor = yellow;
+  }
   switch(state){
   case neutral:
-    
+    if(golfballClose()){
+      if(readColor() == robotColor){
+        sorterServo.write(SORTER_ACCEPT_POSN);
+        state = accept;
+      }else{
+        sorterServo.write(SORTER_REJECT_POSN);
+        state = reject;
+      }
+    }
     break;
   case accept:
     if(millis() - startSortTime > 2000){
@@ -35,7 +57,20 @@ void Sorter::periodic(ControllerData ctrl)
   }
 }
 
+bool Sorter::golfballClose()
+{
+  return true;
+}
+
+Sorter::Color Sorter::readColor()
+{
+  return red;
+}
+
 /*
+
+    enum Colors { red, blue, white, yellow };
+    
 void loop(void) {
   uint16_t r, g, b, c, colorTemp, lux;
 
