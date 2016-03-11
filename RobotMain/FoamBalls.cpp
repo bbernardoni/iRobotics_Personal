@@ -24,8 +24,10 @@ void FoamBalls::periodic(ControllerData ctrl)
   //Scores the foam balls via the servo
   switch(ctrl.driver2.back){
     case 1:
+    if(millis()-startScoreTime<5000){
       scoreServo.write(FOAM_SCORE_POSN);
-      delay(4000);
+    }
+    scoreServo.write(FOAM_HOLD_POSN);
       break;
     case 0:
       scoreServo.write(FOAM_HOLD_POSN);

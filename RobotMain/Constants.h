@@ -30,15 +30,16 @@
 #define CTRL_FOAM_BALL_ARM      (ctrl.driver2.leftBumper)
 
 #define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
+#define CTRL_FOAM_BALL_SERVO    (ctrl.driver2.back)
 
 #define CTRL_SWING_DOOR         (ctrl.driver2.b)
 
 
 //colors 
-#define GREEN                   (ctrl.driver1.dUP)
-#define YELLOW                  (ctrl.driver1.dRIGHT)
-#define WHITE                   (ctrl.driver1.dDOWN)
-#define RED                     (ctrl.driver1.dLEFT)
+#define YELLOW                  (ctrl.driver1.dUP)
+#define RED                     (ctrl.driver1.dRIGHT)
+#define GREEN                   (ctrl.driver1.dDOWN)
+#define WHITE                   (ctrl.driver1.dLEFT)
 
 
 // Servo Posistions
