@@ -19,7 +19,7 @@ class FoamBalls
     Servo scoreServo;
 
     bool scoring;
-    unsigned long startScoreTime;
+    unsigned long scoreStartTime;
 };
 
 
