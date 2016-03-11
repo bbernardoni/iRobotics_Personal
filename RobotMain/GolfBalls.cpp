@@ -24,13 +24,14 @@ void GolfBalls::periodic(ControllerData ctrl)
     dispenserMotor.write(90);
   }
 
-  if(CTRL_FOAM_BALL_SERVO){
+  if(CTRL_GOLF_BALL_SERVO){
     scoring= true; 
-    if (millis() - startScoreTime < 5000){
-      scoreServo.write(GOLF_SCORE_POSN);
-    }
-    else{
-    scoring= false;
+    startScoreTime=millis();
+    scoreServo.write(GOLF_SCORE_POSN);
+  }
+    if (scoring&&millis() - startScoreTime>5000){
+      scoreServo.write(GOLF_SCORE_POSN)
+    
     scoreServo.write(GOLF_HOLD_POSN);
     }
   }
