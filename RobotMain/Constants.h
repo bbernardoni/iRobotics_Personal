@@ -28,6 +28,7 @@
 
 #define CTRL_RELEASE_ARM        (ctrl.driver2.rightBumper)
 #define CTRL_FOAM_BALL_ARM      (ctrl.driver2.leftBumper)
+#define CTRL_FOAM_BALL_SCORE    (ctrl.driver2.back)
 
 #define CTRL_ROBOT_RED          (ctrl.driver2.dRight)
 #define CTRL_ROBOT_BLUE         (ctrl.driver2.dLeft)
@@ -36,7 +37,7 @@
 
 #define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
 
-#define CTRL_SWING_DOOR         (ctrl.driver2.b)
+#define CTRL_SWING_DOOR         (ctrl.driver2.y)
 
 
 // Servo Posistions
