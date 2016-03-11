@@ -4,6 +4,7 @@
 #include <Wire.h>
 #include "Adafruit_TCS34725.h"
 #include "Constants.h"
+#include "Sorter.h"
 
 class ColorSensor
 {
@@ -11,4 +12,6 @@ public:
 	void ColorValues();
 private:
 	uint16_t r, g, b, c, colorTemp, lux;	
-}
+};
+
+#endif

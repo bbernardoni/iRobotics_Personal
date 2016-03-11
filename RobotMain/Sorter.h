@@ -3,7 +3,9 @@
 
 #include "ControllerData.h"
 #include "Constants.h"
+#include "ColorSensor.h"
 #include <Servo.h>
+
 /*
 #include <Wire.h>
 #include "Adafruit_TCS34725.h"
