@@ -1,7 +1,7 @@
 #include "Sorter.h"
 
-Sorter::Sorter(int _sorterServoPin)//:
-//  tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
+Sorter::Sorter(int _sorterServoPin):
+  tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
 {
   sorterServoPin = _sorterServoPin;
   state = neutral;
@@ -12,8 +12,8 @@ void Sorter::startUp()
 {
   sorterServo.attach(sorterServoPin);
   sorterServo.write(SORTER_NEUTRAL_POSN);
-  //tcs.begin();
-  //vcnl.begin();
+  tcs.begin();
+  vcnl.begin();
 }
 
 void Sorter::periodic(ControllerData ctrl)
