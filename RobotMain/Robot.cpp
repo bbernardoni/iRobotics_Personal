@@ -17,6 +17,11 @@ Robot::Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, Drive::Dr
 void Robot::startUp()
 {
   drive.startUp();
+  foamBalls.startUp();
+  golfBalls.startUp();
+  sorter.startUp();
+  swingDoor.startUp();
+  
   ctrl.startByte = 255;
   ctrl.stopByte = 254;
   for(int i=1; i<17; i++)
@@ -34,6 +39,10 @@ void Robot::startUp()
 void Robot::periodic()
 {
   drive.periodic(ctrl);
+  foamBalls.periodic(ctrl);
+  golfBalls.periodic(ctrl);
+  sorter.periodic(ctrl);
+  swingDoor.periodic(ctrl);
 }
 
 void Robot::control(ControllerData _data)

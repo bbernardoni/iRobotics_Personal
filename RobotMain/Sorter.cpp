@@ -1,7 +1,7 @@
 #include "Sorter.h"
 
-Sorter::Sorter(int _sorterServoPin):
-  tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
+Sorter::Sorter(int _sorterServoPin)//:
+//  tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
 {
   sorterServoPin = _sorterServoPin;
   state = neutral;
@@ -10,8 +10,8 @@ Sorter::Sorter(int _sorterServoPin):
 void Sorter::startUp()
 {
   sorterServo.attach(sorterServoPin);
-  tcs.begin();
-  vcnl.begin();
+  //tcs.begin();
+  //vcnl.begin();
 }
 
 void Sorter::periodic(ControllerData ctrl)
@@ -34,7 +34,7 @@ void Sorter::periodic(ControllerData ctrl)
     break;
   }
 }
-
+/*
 
 void loop(void) {
   uint16_t r, g, b, c, colorTemp, lux;
@@ -53,4 +53,4 @@ void loop(void) {
   Serial.print("Ambient: "); Serial.println(vcnl.readAmbient()); //nears a value of 0 with an object that's close
    Serial.print("Proimity: "); Serial.println(vcnl.readProximity()); //increases exponentially when an object nears sensor
    delay(100);
-}
+}*/
