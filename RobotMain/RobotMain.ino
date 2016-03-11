@@ -2,9 +2,20 @@
 #include "ControllerData.h"
 #include "Robot.h"
 #include <Servo.h>
+#include <Wire.h>
+#include <Adafruit_TCS34725.h>
+#include "Adafruit_VCNL4010.h"
 #include <SPI.h>
 #include <SoftwareSerial.h>
 SoftwareSerial XBee(0, 1); // RX, TX
+
+Adafruit_VCNL4010 vcnl;
+#if defined(ARDUINO_ARCH_SAMD)
+// for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
+   #define Serial SerialUSB
+#endif
+
+ Adafruit_TCS34725 tcs = Adafruit_TCS34725();
 
 Robot Rob = Robot(  LEFT_MOTOR_PIN,
                     RIGHT_MOTOR_PIN,
@@ -32,7 +43,21 @@ void setup() {
   XBee.begin(57600);
   Serial.begin(BAUD_RATE);
   Rob.startUp();
-  
+   if (tcs.begin()) {
+    Serial.println("Found sensor");
+  } else {
+    Serial.println("No TCS34725 found ... check your connections");
+    while (1);
+  }
+  Serial.println("VCNL4010 test");
+
+  if (! vcnl.begin()){
+    Serial.println("Sensor not found :(");
+    while (1);
+  }
+  Serial.println("Found VCNL4010");
+
+
   delay(100);
 }
 
@@ -96,5 +121,22 @@ bool attemptRead(){
 
   // finally we have a good message
   return true;
+
+  uint16_t r, g, b, c, colorTemp, lux;
+
+  tcs.getRawData(&r, &g, &b, &c);
+  colorTemp = tcs.calculateColorTemperature(r, g, b);
+  lux = tcs.calculateLux(r, g, b);
+
+  Serial.print("Color Temp: "); Serial.print(colorTemp, DEC); Serial.print(" K - "); //alternative color measurement
+  Serial.print("Lux: "); Serial.print(lux, DEC); Serial.print(" - ");
+  Serial.print("R: "); Serial.print(r, DEC); Serial.print(" ");
+  Serial.print("G: "); Serial.print(g, DEC); Serial.print(" ");
+  Serial.print("B: "); Serial.print(b, DEC); Serial.print(" ");
+  Serial.print("C: "); Serial.print(c, DEC); Serial.print(" ");
+  Serial.println(" ");
+  Serial.print("Ambient: "); Serial.println(vcnl.readAmbient()); //nears a value of 0 with an object that's close
+   Serial.print("Proimity: "); Serial.println(vcnl.readProximity()); //increases exponentially when an object nears sensor
+   delay(100);
 }
 

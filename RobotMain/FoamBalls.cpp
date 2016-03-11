@@ -21,5 +21,14 @@ void FoamBalls::periodic(ControllerData ctrl)
 {
   digitalWrite(releaseArmPin, CTRL_RELEASE_ARM? HIGH: LOW);
   digitalWrite(ballArmPin, CTRL_FOAM_BALL_ARM? HIGH: LOW);
+  //Scores the foam balls via the servo
+  switch(ctrl.driver2.back){
+    case 1:
+      scoreServo.write(FOAM_SCORE_POSN);
+      delay(4000);
+      break;
+    case 0:
+      scoreServo.write(FOAM_HOLD_POSN);
+    }
 }
 
