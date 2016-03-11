@@ -64,6 +64,22 @@
 //Sorter Thresholds
 #define PROX_CLOSE              30000
 
+//RGB values for red, green, white, yellow reference colors
+#define RED_R                   255
+#define RED_G                   0
+#define RED_B                   0
+
+#define GREEN_R                 0
+#define GREEN_G                 255
+#define GREEN_B                 0
+
+#define WHITE_R                 255
+#define WHITE_G                 255
+#define WHITE_B                 255
+
+#define YELLOW_R                255
+#define YELLOW_G                255
+#define YELLOW_B                0
 
 // Deadband macro to be written (driver station might do it)
 

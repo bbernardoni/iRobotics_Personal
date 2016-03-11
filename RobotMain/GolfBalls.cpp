@@ -4,7 +4,7 @@ GolfBalls::GolfBalls(int _dispenserMotorPin, int _scoreServoPin)
 {
   dispenserMotorPin = _dispenserMotorPin;
   scoreServoPin = _scoreServoPin;
-  bool scoring= false;
+  scoring = false;
 }
 
 void GolfBalls::startUp()

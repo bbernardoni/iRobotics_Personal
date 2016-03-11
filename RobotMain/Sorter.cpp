@@ -73,10 +73,10 @@ Sorter::Color Sorter::readColor()
   double distanceRed, distanceGreen, distanceWhite, distanceYellow, minDistance;
   Color bestColor;
   tcs.getRawData(&r,&g,&b,&c);
-  distanceRed = pow(r-255,2) + pow(g,2) + pow(b,2);
-  distanceGreen = pow(r,2) + pow(g-255,2) + pow(b,2);
-  distanceWhite = pow(r-255,2) + pow(g-255,2) + pow(b-255,2);
-  distanceYellow = pow(r-255,2) + pow(g-255,2) + pow(b,2);
+  distanceRed = pow(r-RED_R,2) + pow(g-RED_G,2) + pow(b-RED_B,2);
+  distanceGreen = pow(r-GREEN_R,2) + pow(g-GREEN_G,2) + pow(g-GREEN_B,2);
+  distanceWhite = pow(r-WHITE_R,2) + pow(g-WHITE_G,2) + pow(b-WHITE_B,2);
+  distanceYellow = pow(r-YELLOW_R,2) + pow(g-YELLOW_G,2) + pow(b-YELLOW_B,2);
   bestColor = red;
   minDistance = distanceRed;
   if (distanceGreen < minDistance) {
