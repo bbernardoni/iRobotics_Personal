@@ -13,8 +13,8 @@
 #define FOAM_BALL_SERVO_PIN     8
 
 #define DISPENSER_MOTOR_PIN     11
-#define GOLF_BALL_SERVO_PIN     7
-#define SORTER_SERVO_PIN        13
+#define GOLF_BALL_SERVO_PIN     13
+#define SORTER_SERVO_PIN        7
 #define SWING_DOOR_PIN          14
 
 // Default drive mode
@@ -42,7 +42,8 @@
 #define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
 #define CTRL_GOLF_BALL_SCORE    (ctrl.driver2.start)
 
-#define CTRL_SWING_DOOR         (ctrl.driver2.y)
+#define CTRL_SWING_DOOR_UP      (ctrl.driver2.y)
+#define CTRL_SWING_DOOR_DOWN    (ctrl.driver2.b)
 
 // Servo Posistions
 #define SORTER_NEUTRAL_POSN     60
@@ -57,6 +58,9 @@
 
 #define DISPENSE_SPEED          160
 
+#define SWING_DOOR_UP_SPEED     100
+#define SWING_DOOR_DOWN_SPEED   80
+
 // Times
 #define GOLF_HOLD_TIME          5000
 #define FOAM_HOLD_TIME          4000
@@ -68,24 +72,24 @@
 #define DS_TO_DB(X)             ((X/100.0) - 1.0)
 
 //Sorter Thresholds
-#define PROX_CLOSE              30000
+#define PROX_CLOSE              20000
 
 //RGB values for red, green, white, yellow reference colors
-#define RED_R                   255
-#define RED_G                   0
-#define RED_B                   0
+#define RED_R                   18000
+#define RED_G                   8700
+#define RED_B                   8700
 
-#define GREEN_R                 0
-#define GREEN_G                 255
-#define GREEN_B                 0
+#define GREEN_R                 6700
+#define GREEN_G                 23422
+#define GREEN_B                 8700
 
-#define WHITE_R                 255
-#define WHITE_G                 255
-#define WHITE_B                 255
+#define WHITE_R                 17915
+#define WHITE_G                 23422
+#define WHITE_B                 23144
 
-#define YELLOW_R                255
-#define YELLOW_G                255
-#define YELLOW_B                0
+#define YELLOW_R                18000
+#define YELLOW_G                21000
+#define YELLOW_B                8700
 
 // Deadband macro to be written (driver station might do it)
 

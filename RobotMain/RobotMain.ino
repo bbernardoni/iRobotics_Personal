@@ -35,7 +35,10 @@ void setup() {
   // put your setup code here, to run once:
   XBee.begin(BAUD_RATE);
   Serial.begin(BAUD_RATE);
+
+  Serial.println("Start setup");
   Rob.startUp();
+  Serial.println("End setup");
 
   delay(100);
 }

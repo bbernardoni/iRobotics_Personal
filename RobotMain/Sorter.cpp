@@ -60,7 +60,7 @@ void Sorter::periodic(ControllerData ctrl)
 //true if ball close to proximity sensor
 bool Sorter::golfballClose()
 {
-  if (vcnl.readProximity() < PROX_CLOSE) {
+  if (vcnl.readProximity() > PROX_CLOSE) {
     return true;
   }
   return false;

@@ -3,6 +3,7 @@
 
 #include "ControllerData.h"
 #include "Constants.h"
+#include <Servo.h>
 
 class SwingDoor
 {
@@ -13,7 +14,7 @@ class SwingDoor
 
   private:
     int swingDoorPin;
-    
+    Servo swingDoor;
 };
 
 
