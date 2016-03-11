@@ -29,17 +29,26 @@
 #define CTRL_RELEASE_ARM        (ctrl.driver2.rightBumper)
 #define CTRL_FOAM_BALL_ARM      (ctrl.driver2.leftBumper)
 
+#define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
+
+#define CTRL_SWING_DOOR         (ctrl.driver2.b)
+
+
 //colors 
-#define GREEN
-#define YELLOW
-#define WHITE
-#define RED
+#define GREEN                   (ctrl.driver1.dUP)
+#define YELLOW                  (ctrl.driver1.dRIGHT)
+#define WHITE                   (ctrl.driver1.dDOWN)
+#define RED                     (ctrl.driver1.dLEFT)
 
 
 // Servo Posistions
 #define SORTER_NEUTRAL_POSN     60
 #define SORTER_ACCEPT_POSN      30
 #define SORTER_REJECT_POSN      130
+#define GOLF_SCORE_POSN         180
+#define GOLF_HOLD_POSN          0
+#define FOAM_SCORE_POSN         180
+#define FOAM_HOLD_POSN          0
 
 // Control macros
 // Convert driver station data to [-1.0, 1.0]

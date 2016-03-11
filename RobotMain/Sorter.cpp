@@ -1,7 +1,7 @@
 #include "Sorter.h"
 
 Sorter::Sorter(int _sorterServoPin)//:
-//  tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
+// tcs(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X)
 {
   sorterServoPin = _sorterServoPin;
   state = neutral;
@@ -34,8 +34,8 @@ void Sorter::periodic(ControllerData ctrl)
     break;
   }
 }
-/*
 
+/*
 void loop(void) {
   uint16_t r, g, b, c, colorTemp, lux;
 
