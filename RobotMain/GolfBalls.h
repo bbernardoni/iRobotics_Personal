@@ -15,9 +15,10 @@ class GolfBalls
   private:
     int dispenserMotorPin;
     Servo dispenserMotor;
-    
     int scoreServoPin;
     Servo scoreServo;
+    unsigned long startScoreTime;
+    bool scoring;
     
 };
 

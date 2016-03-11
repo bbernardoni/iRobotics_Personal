@@ -15,12 +15,11 @@ class FoamBalls
   private:
     int releaseArmPin;
     int ballArmPin;
-    
     int scoreServoPin;
     Servo scoreServo;
 
     bool scoring;
-    unsigned long scoreStartTime;
+    unsigned long startScoreTime;
 };
 
 

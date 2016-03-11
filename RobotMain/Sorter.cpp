@@ -21,8 +21,8 @@ void Sorter::periodic(ControllerData ctrl)
   if(CTRL_ROBOT_RED){
     robotColor = red;
   }
-  if(CTRL_ROBOT_BLUE){
-    robotColor = blue;
+  if(CTRL_ROBOT_GREEN){
+    robotColor = green;
   }
   if(CTRL_ROBOT_WHITE){
     robotColor = white;
@@ -57,14 +57,41 @@ void Sorter::periodic(ControllerData ctrl)
   }
 }
 
+//true if ball close to proximity sensor
 bool Sorter::golfballClose()
 {
-  return true;
+  if (vcnl.readProximity() < PROX_CLOSE) {
+    return true;
+  }
+  return false;
 }
 
+//return a color that most closely matches ball rolling in
 Sorter::Color Sorter::readColor()
 {
-  return red;
+  uint16_t r,g,b,c;
+  double distanceRed, distanceGreen, distanceWhite, distanceYellow, minDistance;
+  Color bestColor;
+  tcs.getRawData(&r,&g,&b,&c);
+  distanceRed = pow(r-255,2) + pow(g,2) + pow(b,2);
+  distanceGreen = pow(r,2) + pow(g-255,2) + pow(b,2);
+  distanceWhite = pow(r-255,2) + pow(g-255,2) + pow(b-255,2);
+  distanceYellow = pow(r-255,2) + pow(g-255,2) + pow(b,2);
+  bestColor = red;
+  minDistance = distanceRed;
+  if (distanceGreen < minDistance) {
+    bestColor = green;
+    minDistance = distanceGreen;
+  }
+  if (distanceWhite < minDistance) {
+    bestColor = white;
+    minDistance = distanceWhite;
+  }
+  if (distanceYellow < minDistance) {
+    bestColor = yellow;
+    minDistance = distanceYellow;
+  }
+  return bestColor;
 }
 
 /*

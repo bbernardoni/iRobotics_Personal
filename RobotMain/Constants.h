@@ -31,11 +31,12 @@
 #define CTRL_FOAM_BALL_SCORE    (ctrl.driver2.back)
 
 #define CTRL_ROBOT_RED          (ctrl.driver2.dRight)
-#define CTRL_ROBOT_BLUE         (ctrl.driver2.dLeft)
-#define CTRL_ROBOT_WHITE        (ctrl.driver2.dDown)
+#define CTRL_ROBOT_GREEN        (ctrl.driver2.dDown)
+#define CTRL_ROBOT_WHITE        (ctrl.driver2.dLeft)
 #define CTRL_ROBOT_YELLOW       (ctrl.driver2.dUp)
 
 #define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
+#define CTRL_FOAM_BALL_SERVO    (ctrl.driver2.back)
 
 #define CTRL_SWING_DOOR         (ctrl.driver2.y)
 
@@ -52,6 +53,10 @@
 // Control macros
 // Convert driver station data to [-1.0, 1.0]
 #define DS_TO_DB(X)             ((X/100.0) - 1.0)
+
+//Sorter Thresholds
+#define PROX_CLOSE              30000
+
 
 // Deadband macro to be written (driver station might do it)
 
