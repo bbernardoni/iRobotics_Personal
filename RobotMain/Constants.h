@@ -29,7 +29,12 @@
 #define CTRL_RELEASE_ARM        (ctrl.driver2.rightBumper)
 #define CTRL_FOAM_BALL_ARM      (ctrl.driver2.leftBumper)
 
-#define CTRL_SWING_DOOR         (ctrl.driver2.y)
+//colors 
+#define GREEN
+#define YELLOW
+#define WHITE
+#define RED
+
 
 // Servo Posistions
 #define SORTER_NEUTRAL_POSN     60

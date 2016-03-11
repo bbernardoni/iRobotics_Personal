@@ -14,6 +14,10 @@ void GolfBalls::startUp()
 
 void GolfBalls::periodic(ControllerData ctrl)
 {
-  
+  if(ctrl.driver2.start==1){
+    scoreServo.write(180);
+    } 
+  else
+    scoreServo.write(0);
 }
 

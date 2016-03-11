@@ -21,5 +21,11 @@ void FoamBalls::periodic(ControllerData ctrl)
 {
   digitalWrite(releaseArmPin, CTRL_RELEASE_ARM? HIGH: LOW);
   digitalWrite(ballArmPin, CTRL_FOAM_BALL_ARM? HIGH: LOW);
+  if(ctrl.driver2.back==1){
+    scoreServo.write(180);
+    delay(4000);
+    }
+  else
+    scoreServo.write(0);
 }
 
