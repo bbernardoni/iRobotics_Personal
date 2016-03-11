@@ -3,17 +3,17 @@
 
 #include "ControllerData.h"
 #include "Constants.h"
+#include "ColorSensor.h"
 #include <Servo.h>
-/*
-#include <Wire.h>
-#include "Adafruit_TCS34725.h"
-#include "Adafruit_VCNL4010.h"*/
+
+
+
 
 class Sorter
 {
   public:
     enum SorterState { neutral, accept, reject };
-    
+    SorterState state;
     Sorter(int _sorterServoPin);
     void startUp();
     void periodic(ControllerData ctrl);
@@ -25,7 +25,7 @@ class Sorter
     Adafruit_VCNL4010 vcnl;
     Adafruit_TCS34725 tcs;*/
 
-    SorterState state;
+    
     unsigned long startSortTime;
 };
 
