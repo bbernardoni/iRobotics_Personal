@@ -11,11 +11,17 @@ Robot Rob = Robot(  LEFT_MOTOR_PIN,
                     MIDDLE_MOTOR_PIN,
                     GYRO_PIN,
                     SHIFTER_PIN,
-                    FOAM_BALL_ARM_PIN,
+                    DRIVE_MODE,
+                    
                     RELEASER_ARM_PIN,
-                    GOLF_BALL_SERVO_PIN,
+                    FOAM_BALL_ARM_PIN,
                     FOAM_BALL_SERVO_PIN,
-                    DRIVE_MODE
+                    
+                    DISPENSER_MOTOR_PIN,
+                    GOLF_BALL_SERVO_PIN,
+                    SORTER_SERVO_PIN,
+                    
+                    SWING_DOOR_PIN
                  );
 
 ControllerData readBuffer;

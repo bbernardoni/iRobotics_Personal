@@ -3,15 +3,21 @@
 
 #include "Arduino.h"
 #include "Drive.h"
+#include "FoamBalls.h"
+#include "GolfBalls.h"
+#include "Sorter.h"
+#include "SwingDoor.h"
 #include "ControllerData.h"
 #include "Constants.h"
 
 class Robot
 {
   public:
-    Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, 
-          int _bArm, int _rArm, int _gbServo, int _fbServo, 
-          Drive::DriveMode _mode);
+    Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, Drive::DriveMode _mode,
+          int _releaseArmPin, int _ballArmPin, int _scoreFoamServoPin,
+          int _dispenserMotorPin, int _scoreGolfServoPin, int _sorterServoPin,
+          int _swingDoorPin
+          );
     void startUp();
     void periodic();
 
@@ -20,11 +26,10 @@ class Robot
   private:
     ControllerData ctrl;
     Drive drive;
-    
-    int bArm;
-    int rArm;
-    int gbServo;
-    int fbServo;
+    FoamBalls foamBalls;
+    GolfBalls golfBalls;
+    Sorter sorter;
+    SwingDoor swingDoor;
 };
 
 
