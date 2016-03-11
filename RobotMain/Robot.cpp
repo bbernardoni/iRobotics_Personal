@@ -1,14 +1,17 @@
 #include "Robot.h"
 
-Robot::Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin,
-             int _bArm, int _rArm, int _gbServo, int _fbServo, 
-             Drive::DriveMode _mode):
-  drive(_lD, _rD, _mD, _gyroPin, _shifterPin, _mode)
+Robot::Robot(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, Drive::DriveMode _mode,
+             int _releaseArmPin, int _ballArmPin, int _scoreFoamServoPin,
+             int _dispenserMotorPin, int _scoreGolfServoPin, int _sorterServoPin,
+             int _swingDoorPin
+             ):
+  drive(_lD, _rD, _mD, _gyroPin, _shifterPin, _mode),
+  foamBalls(_releaseArmPin, _ballArmPin, _scoreFoamServoPin),
+  golfBalls(_dispenserMotorPin, _scoreGolfServoPin),
+  sorter(_sorterServoPin),
+  swingDoor(_swingDoorPin)
 {
-  bArm = _bArm;
-  rArm = _rArm;
-  gbServo = _gbServo;
-  fbServo = _fbServo;
+  
 }
 
 void Robot::startUp()

@@ -8,10 +8,6 @@ Drive::Drive(int _lD, int _rD, int _mD, int _gyroPin, int _shifterPin, DriveMode
   gyroPin = _gyroPin;
   shifterPin =  _shifterPin;
   mode = _mode;
-
-  double transX = 25.0;
-  double transY = 25.0;
-  double rot = 0.0;
 }
 
 void Drive::startUp()
