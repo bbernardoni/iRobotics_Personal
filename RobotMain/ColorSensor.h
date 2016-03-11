@@ -9,7 +9,7 @@
 class ColorSensor
 {
 public:
-	void ColorValues();
+	int ColorValues(int correctTemperature);
 private:
 	uint16_t r, g, b, c, colorTemp, lux;	
 };
