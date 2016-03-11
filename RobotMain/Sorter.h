@@ -15,7 +15,7 @@ class Sorter
 {
   public:
     enum SorterState { neutral, accept, reject };
-    
+    SorterState state;
     Sorter(int _sorterServoPin);
     void startUp();
     void periodic(ControllerData ctrl);
@@ -27,7 +27,7 @@ class Sorter
     Adafruit_VCNL4010 vcnl;
     Adafruit_TCS34725 tcs;*/
 
-    SorterState state;
+    
     unsigned long startSortTime;
 };
 
