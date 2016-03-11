@@ -13,12 +13,16 @@ class Sorter
 {
   public:
     enum SorterState { neutral, accept, reject };
+    enum Color { red, blue, white, yellow };
     
     Sorter(int _sorterServoPin);
     void startUp();
     void periodic(ControllerData ctrl);
 
   private:
+    bool golfballClose();
+    Color readColor();
+  
     int sorterServoPin;
     Servo sorterServo;
 /*
@@ -26,6 +30,7 @@ class Sorter
     Adafruit_TCS34725 tcs;*/
 
     SorterState state;
+    Color robotColor;
     unsigned long startSortTime;
 };
 
