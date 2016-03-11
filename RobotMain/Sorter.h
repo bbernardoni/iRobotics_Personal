@@ -12,7 +12,7 @@ class Sorter
 {
   public:
     enum SorterState { neutral, accept, reject };
-    enum Color { red, blue, white, yellow };
+    enum Color { red, green, white, yellow };
     
     Sorter(int _sorterServoPin);
     void startUp();
