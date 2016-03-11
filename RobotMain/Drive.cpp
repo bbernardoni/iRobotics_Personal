@@ -23,6 +23,7 @@ void Drive::startUp()
   SPI.setClockDivider(SPI_CLOCK_DIV16); 
   SPI.setDataMode(SPI_MODE0);
   lastGyroRead = 0;
+  gyroOffset = 0.0;
 
   pinMode(shifterPin, OUTPUT);
   digitalWrite(shifterPin, LOW);
@@ -35,6 +36,16 @@ void Drive::periodic(ControllerData ctrl)
   switch(mode){
   case fieldCentric:
     fieldCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);
+
+    if(CTRL_GYRO_RESET){
+      gyroOffset = gyroAngle;
+    }
+    if(CTRL_GYRO_ROT_CCW){
+      gyroOffset += PI/2.0;
+    }
+    if(CTRL_GYRO_ROT_CW){
+      gyroOffset -= PI/2.0;
+    }
     break;
   case robotCentric:
     robotCentricControl(CTRL_TRANS_X, CTRL_TRANS_Y, CTRL_ROT);
@@ -45,11 +56,11 @@ void Drive::periodic(ControllerData ctrl)
 void Drive::fieldCentricControl(double transX, double transY, double rot){
   double robX = 0.0;
   double robY = 0.0;
-  double gyroAngle = getGyroAngle();
-  Serial.println(gyroAngle);
+  double robAngle = getGyroAngle();
+  //Serial.println(robAngle);
 
   if(transX != 0.0 && transY != 0.0){
-    double transAngle = PMod(atan2(transY, transX) - gyroAngle, PI*2.0);
+    double transAngle = PMod(atan2(transY, transX) - robAngle, PI*2.0);
     double transMag = (fabs(transX) > fabs(transY))? fabs(transX): fabs(transY);
     
     if(transAngle < PI/4.0 || transAngle > 7.0*PI/4.0){ // positive X is max
@@ -117,5 +128,5 @@ double Drive::getGyroAngle(){
   }
   lastGyroRead = readTime;
   
-  return gyroAngle;
+  return PMod(gyroAngle - gyroOffset, PI*2.0);
 }

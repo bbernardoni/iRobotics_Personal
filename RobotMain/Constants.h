@@ -26,6 +26,10 @@
 #define CTRL_ROT                DS_TO_DB(ctrl.driver1.RSX)
 #define CTRL_SHIFT              (ctrl.driver1.RTG > 20)
 
+#define CTRL_GYRO_RESET         (ctrl.driver1.a)
+#define CTRL_GYRO_ROT_CCW       (ctrl.driver1.leftBumper)
+#define CTRL_GYRO_ROT_CW        (ctrl.driver1.rightBumper)
+
 #define CTRL_RELEASE_ARM        (ctrl.driver2.rightBumper)
 #define CTRL_FOAM_BALL_ARM      (ctrl.driver2.leftBumper)
 #define CTRL_FOAM_BALL_SCORE    (ctrl.driver2.back)

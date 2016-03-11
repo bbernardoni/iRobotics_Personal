@@ -42,6 +42,7 @@ class Drive
     unsigned long lastGyroRead;
     int gyroSpeed;
     double gyroAngle;
+    double gyroOffset;
 
     int shifterPin;
     
