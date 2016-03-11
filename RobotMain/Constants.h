@@ -29,12 +29,18 @@
 #define CTRL_RELEASE_ARM        (ctrl.driver2.rightBumper)
 #define CTRL_FOAM_BALL_ARM      (ctrl.driver2.leftBumper)
 
+#define CTRL_ROBOT_RED          (ctrl.driver2.dRight)
+#define CTRL_ROBOT_BLUE         (ctrl.driver2.dLeft)
+#define CTRL_ROBOT_WHITE        (ctrl.driver2.dDown)
+#define CTRL_ROBOT_YELLOW       (ctrl.driver2.dUp)
+
 #define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
 #define CTRL_FOAM_BALL_SERVO    (ctrl.driver2.back)
 
 #define CTRL_SWING_DOOR         (ctrl.driver2.b)
 
 
+<<<<<<< HEAD
 //colors 
 #define YELLOW                  (ctrl.driver1.dUP)
 #define RED                     (ctrl.driver1.dRIGHT)
@@ -42,6 +48,8 @@
 #define WHITE                   (ctrl.driver1.dLEFT)
 
 
+=======
+>>>>>>> origin/master
 // Servo Posistions
 #define SORTER_NEUTRAL_POSN     60
 #define SORTER_ACCEPT_POSN      30
