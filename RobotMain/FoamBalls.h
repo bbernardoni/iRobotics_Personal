@@ -17,8 +17,9 @@ class FoamBalls
     int ballArmPin;
     int scoreServoPin;
     Servo scoreServo;
+
+    bool scoring;
     unsigned long startScoreTime;
-    
 };
 
 
