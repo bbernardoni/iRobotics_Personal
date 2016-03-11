@@ -17,7 +17,7 @@ class GolfBalls
     Servo dispenserMotor;
     int scoreServoPin;
     Servo scoreServo;
-    unsigned long startScoreTime;
+    unsigned long scoreStartTime;
     bool scoring;
     
 };

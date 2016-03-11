@@ -18,7 +18,7 @@
 #define SWING_DOOR_PIN          14
 
 // Default drive mode
-#define DRIVE_MODE              Drive::fieldCentric
+#define DRIVE_MODE              Drive::robotCentric
 
 // Controls
 #define CTRL_TRANS_X            DS_TO_DB(ctrl.driver1.LSX)
@@ -36,19 +36,26 @@
 #define CTRL_ROBOT_YELLOW       (ctrl.driver2.dUp)
 
 #define CTRL_DISPENSER_MOTOR    (ctrl.driver2.x)
-#define CTRL_FOAM_BALL_SERVO    (ctrl.driver2.back)
+#define CTRL_GOLF_BALL_SCORE    (ctrl.driver2.start)
 
 #define CTRL_SWING_DOOR         (ctrl.driver2.y)
-
 
 // Servo Posistions
 #define SORTER_NEUTRAL_POSN     60
 #define SORTER_ACCEPT_POSN      30
 #define SORTER_REJECT_POSN      130
+
 #define GOLF_SCORE_POSN         180
 #define GOLF_HOLD_POSN          0
+
 #define FOAM_SCORE_POSN         180
 #define FOAM_HOLD_POSN          0
+
+#define DISPENSE_SPEED          160
+
+// Times
+#define GOLF_HOLD_TIME          5000
+#define FOAM_HOLD_TIME          4000
 
 // Control macros
 // Convert driver station data to [-1.0, 1.0]

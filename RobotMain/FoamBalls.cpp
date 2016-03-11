@@ -33,7 +33,7 @@ void FoamBalls::periodic(ControllerData ctrl)
     scoreServo.write(FOAM_SCORE_POSN);
   }
   
-  if(scoring && millis()-scoreStartTime > 4000){
+  if(scoring && millis()-scoreStartTime > FOAM_HOLD_TIME){
     scoring = false;
     scoreServo.write(FOAM_HOLD_POSN);
   }
