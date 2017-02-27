@@ -12,19 +12,25 @@ FoamBalls::FoamBalls(int _releaseArmPin, int _ballArmPin, int _scoreServoPin)
 void FoamBalls::startUp()
 {
   scoreServo.attach(scoreServoPin);
+  releaseServo.attach(releaseArmPin);
   
-  pinMode(releaseArmPin, OUTPUT);
-  digitalWrite(releaseArmPin, LOW);
   pinMode(ballArmPin, OUTPUT);
   digitalWrite(ballArmPin, LOW);
   
   scoreServo.write(FOAM_HOLD_POSN);
+  releaseServo.write(90);
 }
 
 void FoamBalls::periodic(ControllerData ctrl)
 {
-  digitalWrite(releaseArmPin, CTRL_RELEASE_ARM? HIGH: LOW);
-  digitalWrite(ballArmPin, CTRL_FOAM_BALL_ARM? HIGH: LOW);
+  double releaseSpeed = 90;
+  if(CTRL_RELEASE_ARM > 0) // Up
+    releaseSpeed = 90 - 20*CTRL_RELEASE_ARM;
+  else if(CTRL_RELEASE_ARM < 0) // Down
+    releaseSpeed = 90 - 10*CTRL_RELEASE_ARM;
+  releaseServo.write(releaseSpeed);
+  
+  digitalWrite(ballArmPin, CTRL_FOAM_BALL_ARM? LOW: HIGH);
   
   //Scores the foam balls via the servo
   if(CTRL_FOAM_BALL_SCORE){

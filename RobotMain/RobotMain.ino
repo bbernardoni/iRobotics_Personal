@@ -6,8 +6,6 @@
 #include <Adafruit_TCS34725.h>
 #include <Adafruit_VCNL4010.h>
 #include <SPI.h>
-#include <SoftwareSerial.h>
-SoftwareSerial XBee(0, 1); // RX, TX
 
 
 Robot Rob = Robot(  LEFT_MOTOR_PIN,
@@ -33,13 +31,9 @@ int bufferIndex = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  XBee.begin(BAUD_RATE);
-  Serial.begin(BAUD_RATE);
+  Serial.begin(9600);
 
-  Serial.println("Start setup");
   Rob.startUp();
-  Serial.println("End setup");
-
   delay(100);
 }
 
@@ -50,7 +44,7 @@ void loop() {
     //Serial.println("LSX="+readBuffer.driver1.LSX);
   }
   Rob.periodic();
-  delay(10);
+  //delay(10);
 }
 
 // attempt to read controller

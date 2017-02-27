@@ -14,6 +14,7 @@ class FoamBalls
 
   private:
     int releaseArmPin;
+    Servo releaseServo;
     int ballArmPin;
     int scoreServoPin;
     Servo scoreServo;

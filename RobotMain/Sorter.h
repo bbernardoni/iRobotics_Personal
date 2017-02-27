@@ -11,7 +11,7 @@
 class Sorter
 {
   public:
-    enum SorterState { neutral, accept, reject };
+    enum SorterState { neutral, dwell, accept, reject };
     enum Color { red, green, white, yellow };
     
     Sorter(int _sorterServoPin);
@@ -31,6 +31,7 @@ class Sorter
     SorterState state;
     Color robotColor;
     unsigned long startSortTime;
+    unsigned long startDwellTime;
 };
 
 
